@@ -8,11 +8,36 @@ document.addEventListener("DOMContentLoaded", ()=>{
      hamButton.addEventListener("click", ()=>{
           svNav.classList.toggle("show");
      });
+
      const footerSectionLoader = () => {
           const footerContent = document.querySelector("#footerTemplate").content.cloneNode(true);
           const footerFrame = document.querySelector(".svFooterSection");
           footerFrame.classList.add("active");
           footerFrame.appendChild(footerContent);
+     }
+     const galleryImagesLoader = () => {
+          const galleryImages = document.querySelector(".galleryImages");
+          const allImages = document.querySelectorAll(".galleryImages .thumb");
+          allImages.forEach((image, index)=>{
+               async function imageLoader() {
+                    const imageUrl = `Assets/Images/Gallery/thumbs/thumb${index + 1}.webp`;
+                    const result = await fetch(imageUrl);
+                    if(result.status == 200){
+                         const img = new Image();
+                         img.src = imageUrl;
+                         img.alt = "Sri Vinayaka Mini Function Hall image in Beechupally Gadwal";
+                         img.style.width = "100%";
+                         img.style.objectFit = "cover";
+                         const currEle = allImages[index];
+                         currEle.appendChild(img);
+                         const testEle = currEle.querySelector(".galImgPreloader");
+                         testEle.style.display = "none";
+                         console.log(testEle);
+                         
+                    }
+               }
+               imageLoader();
+          })
      }
      const aboutSectionLoader = () => {
           const aboutContent = document.querySelector("#svAboutTemplate").content.cloneNode(true);
@@ -26,11 +51,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
                               const imgOverlay = document.querySelector(".aboutContentWrapper figure");
                               imgOverlay.style.transition = "0.6s ease-in-out";
                               imgOverlay.classList.add("overlay");
-                              console.log("Intersecting");
                          }
                })
           });
           intObsever.observe(aboutContentWrapper);
+               galleryImagesLoader();
                footerSectionLoader();
      }
      const servicesSection = () => {

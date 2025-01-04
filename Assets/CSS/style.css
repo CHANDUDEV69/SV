@@ -249,6 +249,105 @@ figcaption{
 #quickLinks li{
      padding-block: 0.6rem;
 }
+.svGallerySection{
+     padding: 2.1rem 1.2rem;
+}
+.galleryImages{
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+     gap: 12px;
+     background: var(--sv-primary-blue);
+     margin-block: 1.8rem;
+}
+.thumb{
+     position: relative;
+     width: 100%;
+     aspect-ratio: 1 / 1;
+     background: #fff;
+     border-radius: 3px;
+     overflow: hidden;
+     border: 1px solid var(--sv-primary-blue);
+}
+.galImgPreloader{
+     position: absolute;
+     display: grid;
+     width: 100%;
+     height: 100%;
+     background: #fff;
+     z-index: 0;
+}
+.galImgPreloader::before{
+     content: '';
+     position: absolute;
+     width: 60%;
+     height: 6px;
+     margin-top: 42%;
+     margin-left: 9%;
+     border-radius: 18px;
+     background-image: linear-gradient(90deg, #acacac, #fff, #fff);
+     z-index: 10;
+     animation: bgAnimate 1.2s ease-in-out infinite;
+}
+.galImgPreloader::after{
+     content: '';
+     position: absolute;
+     width: 90%;
+     height: 6px;
+     margin-top: 60%;
+     margin-left: 9%;
+     border-radius: 18px;
+     background-image: linear-gradient(90deg, #acacac, #fff, #fff);
+     z-index: 10;
+     animation: bgAnimate 1.2s ease-in-out infinite;
+}
+@keyframes bgAnimate{
+     0%{
+          background-size: 100%;
+     }
+     50%{
+          background-size: 150%;
+     }
+     100%{
+          background-size: 210%;
+     }
+}
+dialog{
+     width: 96vw;
+     height: auto;
+     margin-inline: auto;
+     margin-top: 50%;
+     aspect-ratio: 1 / 1;
+     border: none;
+     outline: none;
+     border-radius: 6px;
+     padding: 1.2rem;
+     z-index: 1000;
+     background: #ccc1;
+
+}
+dialog::backdrop{
+     background: rgba(0, 0, 0, 0.6);
+}
+.lightbox{
+     position: relative;
+     height: 100%;
+     width: 100%;
+     box-shadow: -1.2px -1.2px 12px #0006;
+     border-radius: 6px;
+     overflow: hidden;
+     background: #fff;
+}
+.lightboxImgViewer{
+     width: 100%;
+}
+.lightboxImgViewer img{
+     width: 100%;
+     object-fit: cover;
+}
+.closeLightbox{
+     text-align: right;
+     padding: 0.6rem;
+}
 #quickLinks li a{
      color: #fff;
      text-decoration: none;

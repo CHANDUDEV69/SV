@@ -15,8 +15,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
           footerFrame.classList.add("active");
           footerFrame.appendChild(footerContent);
      }
+
      const galleryImagesLoader = () => {
           const galleryImages = document.querySelector(".galleryImages");
+          const svGalleryTemplate = document.querySelector("#svGalleryTemplate").content.cloneNode(true);
+          const svGallerySection = document.querySelector("#svGallerySection");
+          svGallerySection.appendChild(svGalleryTemplate);
           const allImages = document.querySelectorAll(".galleryImages .thumb");
           allImages.forEach((image, index)=>{
                async function imageLoader() {
@@ -30,14 +34,32 @@ document.addEventListener("DOMContentLoaded", ()=>{
                          img.style.objectFit = "cover";
                          const currEle = allImages[index];
                          currEle.appendChild(img);
-                         const testEle = currEle.querySelector(".galImgPreloader");
-                         testEle.style.display = "none";
-                         console.log(testEle);
                          
+                         // Add click event to open image in lightbox
+                         currEle.addEventListener("click", ()=>{
+                              const dialog = document.querySelector(".svGallerySection dialog");
+                              const closeLightbox = document.querySelector(".closeLightbox");
+                              dialog.showModal();
+                              dialog.addEventListener("blur", ()=>dialog.close());   
+                              closeLightbox.addEventListener("click", ()=>dialog.close());
+                              const lightbox = document.querySelector(".lightbox");
+                              lightbox.style.display = "block";
+                              const lightboxImg = document.querySelector(".lightboxImgViewer img");
+                              lightboxImg.src = `Assets/Images/Gallery/thumbs/thumb${index + 1}.webp`;
+                              lightboxImg.alt = "Sri Vinayaka Mini Function Hall image in Beechupally Gadwal";
+                              // const closeLightbox = document.querySelector(".closeLightbox");
+                              // closeLightbox.addEventListener("click", ()=>{
+                              //      lightbox.style.display = "none";
+                              // });
+                         }); 
+                         const loadingEle = currEle.querySelector(".galImgPreloader");
+                         loadingEle.style.display = "none";
                     }
                }
                imageLoader();
           })
+          
+          footerSectionLoader();
      }
      const aboutSectionLoader = () => {
           const aboutContent = document.querySelector("#svAboutTemplate").content.cloneNode(true);
@@ -56,7 +78,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
           });
           intObsever.observe(aboutContentWrapper);
                galleryImagesLoader();
-               footerSectionLoader();
      }
      const servicesSection = () => {
           const servicesContent = document.querySelector("#servicesTemplate").content.cloneNode(true);

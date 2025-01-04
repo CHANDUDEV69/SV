@@ -120,7 +120,7 @@
                          </figure>
                          <div id="aboutDescription">
                               <div id="aboutContent">
-                                   <p>
+                                   <p aria-label="About Us Description" tabindex="16">
                                         Sri Vinayaka Mini Function Hall is located in Beechupalli, Gadwal District. We have been providing convenient services to our tenants since 2023. We are grateful for the positive feedback we receive from our customers.
                                    </p>
                          </div>
@@ -132,8 +132,22 @@
             </template>
            <!-- About Section End -->
             <!-- Gallery Section Start -->
-               <div class="svGallerySection" id="svGallerySection"></div>
+               <div class="svGallerySection" id="svGallerySection">
+                    <dialog>
+                         <div class="lightbox">
+                              <div class="closeLightbox">
+                                   <img src="Assets/SVG/xsquare.svg" alt="close" width="21px">
+                              </div>
+                              <div class="lightboxImgViewer">
+                                   <img src="Assets/Images/gallery/thumbs/thumb1.webp" alt="">
+                              </div>
+                         </div>
+                    </dialog>
+               </div>
                <template id="svGalleryTemplate">
+                    <div class="sectionTitle">
+                         <h3  tabindex="17" aria-label="Gallery"> Gallery </h3>
+                       </div>
                     <div class="galleryImages">
                          <div class="thumb">
                               <div class="galImgPreloader"></div>

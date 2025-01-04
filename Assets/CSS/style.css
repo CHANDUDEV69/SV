@@ -40,8 +40,8 @@ body{
      transition: 0.6s ease-in-out;
 }
 .bannerBg #bannerImg{
-     object-fit: cover;
-     width: 100%;
+     /* object-fit: cover; */
+     height: 100%;
      transition: 0.6s ease-in-out;
      opacity: 1;
 }
@@ -171,7 +171,7 @@ body{
 }
 .servicesGrid{
      display: grid;
-     grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
      gap: 1.2rem;
 }
 .serviceBox{
@@ -347,6 +347,11 @@ dialog::backdrop{
 .closeLightbox{
      text-align: right;
      padding: 0.6rem;
+}
+.svTestimonials{
+     width: 100%;
+     height: 210px;
+     background: #fff;
 }
 #quickLinks li a{
      color: #fff;

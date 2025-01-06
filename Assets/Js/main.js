@@ -61,18 +61,35 @@ document.addEventListener("DOMContentLoaded", ()=>{
           
           footerSectionLoader();
      }
+   
+             
      const aboutSectionLoader = () => {
           const aboutContent = document.querySelector("#svAboutTemplate").content.cloneNode(true);
           const aboutFrame = document.querySelector(".svAboutSection");
           aboutFrame.classList.add("active");
           aboutFrame.appendChild(aboutContent);
+   
+
           const aboutContentWrapper = document.querySelector(".aboutContentWrapper");
           const intObsever = new IntersectionObserver((entries)=>{
                     entries.forEach(entry => {
                          if(entry.isIntersecting){
                               const imgOverlay = document.querySelector(".aboutContentWrapper figure");
                               imgOverlay.style.transition = "0.6s ease-in-out";
-                              imgOverlay.classList.add("overlay");
+                                       // persformanceTiming Observer       
+                                        const observer = new PerformanceObserver((list) => {
+                                             list.getEntries().forEach((entry) => {
+                                                  if (entry.identifier === "abt-img") {
+                                                       console.log(entry.url);
+                                               imgOverlay.classList.add("overlay");
+                                             }
+                                       
+                                           });
+                                         });
+                                      observer.observe({ type: "element", buffered: true });
+                                   
+                                      imgOverlay.classList.add("overlay");
+                                    
                          }
                })
           });

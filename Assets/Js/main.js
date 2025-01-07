@@ -41,13 +41,18 @@ document.addEventListener("DOMContentLoaded", ()=>{
                               imageNodes.getEntries().forEach((image) => {
                                    const thumbEle = `thumb${index + 1}.webp`;
                                    if (image.identifier === ("thumb" + eval(index + 1))) {
-                                        console.log(image.identifier);
                                         const loadingEle = currEle.querySelector(".galImgPreloader");
                                         loadingEle.style.display = "none";
                                    }
                               });
                          });
+                         if(currEleImg.elementTiming){
                          observer2.observe({ type: "element", buffered: true });
+                         }
+                         else{
+                              const loadingEle = currEle.querySelector(".galImgPreloader");
+                              loadingEle.style.display = "none";
+                         }
                          
                          
                          // Add click event to open image in lightbox
@@ -62,10 +67,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
                               const lightboxImg = document.querySelector(".lightboxImgViewer img");
                               lightboxImg.src = `Assets/Images/Gallery/thumbs/thumb${index + 1}.webp`;
                               lightboxImg.alt = "Sri Vinayaka Mini Function Hall image in Beechupally Gadwal";
-                              // const closeLightbox = document.querySelector(".closeLightbox");
-                              // closeLightbox.addEventListener("click", ()=>{
-                              //      lightbox.style.display = "none";
-                              // });
                          }); 
                  
                     }
@@ -101,14 +102,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                        
                                            });
                                          });
-                                         if(aboutImg.elementTiming === "abt-img"){
+                                         if(aboutImg.elementTiming){
                                               observer.observe({ type: "element", buffered: true });
-                                         }
-                                         else{
-                                             aboutImg.addEventListener("load", ()=>{
+                                             }
+                                             else{
+                                             //   console.log("Element Timing not supported");\
                                                   document.querySelector(".imgLoading").style.display = "none";
-                                                  imgOverlay.classList.add("overlay");    
-                                             })
+                                                  imgOverlay.classList.add("overlay");  
+                                            
                                          }
                                         //  if(Element.elementTiming) {
                                    

@@ -76,19 +76,28 @@ document.addEventListener("DOMContentLoaded", ()=>{
                          if(entry.isIntersecting){
                               const imgOverlay = document.querySelector(".aboutContentWrapper figure");
                               imgOverlay.style.transition = "0.6s ease-in-out";
-                                       // persformanceTiming Observer       
+                                       // persformanceTiming Observer    
+                                       const aboutImg = document.querySelector("#aboutImg");   
                                         const observer = new PerformanceObserver((list) => {
                                              list.getEntries().forEach((entry) => {
                                                   if (entry.identifier === "abt-img") {
-                                                       console.log(entry.url);
+                                                       document.querySelector(".imgLoading").style.display = "none";
                                                imgOverlay.classList.add("overlay");
                                              }
                                        
                                            });
                                          });
-                                      observer.observe({ type: "element", buffered: true });
+                                         if(aboutImg.elementTiming === "abt-img"){
+                                              observer.observe({ type: "element", buffered: true });
+                                         }
+                                         else{
+                                             aboutImg.addEventListener("load", ()=>{
+                                                  document.querySelector(".imgLoading").style.display = "none";
+                                                  imgOverlay.classList.add("overlay");    
+                                             })
+                                         }
+                                        //  if(Element.elementTiming) {
                                    
-                                      imgOverlay.classList.add("overlay");
                                     
                          }
                })

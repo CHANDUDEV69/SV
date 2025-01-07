@@ -34,6 +34,21 @@ document.addEventListener("DOMContentLoaded", ()=>{
                          img.style.objectFit = "cover";
                          const currEle = allImages[index];
                          currEle.appendChild(img);
+                         const currEleImg = currEle.querySelector("img");
+                         currEleImg.setAttribute("elementTiming", "thumb" + eval(index + 1));
+
+                         const observer2 = new PerformanceObserver((imageNodes) => {
+                              imageNodes.getEntries().forEach((image) => {
+                                   const thumbEle = `thumb${index + 1}.webp`;
+                                   if (image.identifier === ("thumb" + eval(index + 1))) {
+                                        console.log(image.identifier);
+                                        const loadingEle = currEle.querySelector(".galImgPreloader");
+                                        loadingEle.style.display = "none";
+                                   }
+                              });
+                         });
+                         observer2.observe({ type: "element", buffered: true });
+                         
                          
                          // Add click event to open image in lightbox
                          currEle.addEventListener("click", ()=>{
@@ -52,8 +67,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                               //      lightbox.style.display = "none";
                               // });
                          }); 
-                         const loadingEle = currEle.querySelector(".galImgPreloader");
-                         loadingEle.style.display = "none";
+                 
                     }
                }
                imageLoader();
